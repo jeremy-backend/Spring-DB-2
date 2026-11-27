@@ -65,7 +65,7 @@ public class JdbcTemplateItemRepositoryV2 implements ItemRepository {
                 "set item_name=:itemName, price=:price, quantity=:quantity " +
                 "where id=:id";
 
-        SqlParameterSource param = new MapSqlParameterSource();
+        SqlParameterSource param = new MapSqlParameterSource()
                 .addValue("itemName", updateParam.getItemName())
                 .addValue("price", updateParam.getPrice())
                 .addValue("quantity", updateParam.getQuantity())
@@ -108,7 +108,6 @@ public class JdbcTemplateItemRepositoryV2 implements ItemRepository {
                 sql += " and";
             }
             sql += " price <= :maxPrice";
-            param.add(maxPrice);
         }
         log.info("sql={}", sql);
         return template.query(sql, param, itemRowMapper());
